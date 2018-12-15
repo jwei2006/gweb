@@ -3,13 +3,13 @@ package sys
 import (
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"github.com/jwei2006/gweb/config"
 	"io"
 	"os"
-	"gweb/config"
 	"strconv"
 )
 
-func Run(initRouter func(*gin.Engine))  {
+func Run(initRouter func(*gin.Engine)) {
 	InitLogger()
 	gin.DisableConsoleColor()
 	if !config.Conf.IsDebug {

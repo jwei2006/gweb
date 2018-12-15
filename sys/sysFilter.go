@@ -2,8 +2,8 @@ package sys
 
 import (
 	"github.com/gin-gonic/gin"
-	"gweb/config"
-	"gweb/util"
+	"github.com/jwei2006/gweb/config"
+	"github.com/jwei2006/gweb/util"
 	"strings"
 )
 

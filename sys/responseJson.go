@@ -3,9 +3,9 @@ package sys
 import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
-	"gweb/util"
+	"github.com/jwei2006/gweb/config"
+	"github.com/jwei2006/gweb/util"
 	"net/http"
-	"gweb/config"
 	"strconv"
 	"strings"
 	"time"
@@ -20,8 +20,8 @@ func JsonResSuccess(c *gin.Context, data interface{}) {
 }
 func JsonResErr(c *gin.Context, code int, msg string, data interface{}) {
 	c.JSON(http.StatusOK, gin.H{
-		"code": code,
-		"datas": data,
+		"code":    code,
+		"datas":   data,
 		"message": msg,
 	})
 	ctx := util.GetCtx(c)

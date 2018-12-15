@@ -4,8 +4,8 @@ import (
 	"errors"
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"gweb/config"
-	"gweb/sys"
+	"github.com/jwei2006/gweb/config"
+	"github.com/jwei2006/gweb/sys"
 )
 
 func GetSession(c *gin.Context, key string) string {

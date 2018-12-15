@@ -2,8 +2,8 @@ package service
 
 import (
 	"errors"
-	"gweb/config"
-	"gweb/sys"
+	"github.com/jwei2006/gweb/config"
+	"github.com/jwei2006/gweb/sys"
 	"math/rand"
 	"strconv"
 	"time"

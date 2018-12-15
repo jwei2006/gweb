@@ -2,7 +2,7 @@ package sys
 
 import (
 	"fmt"
-	"gweb/config"
+	"github.com/jwei2006/gweb/config"
 	"log"
 	"os"
 )

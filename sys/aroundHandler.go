@@ -3,9 +3,9 @@ package sys
 import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
+	"github.com/jwei2006/gweb/config"
+	"github.com/jwei2006/gweb/util"
 	"io/ioutil"
-	"gweb/config"
-	"gweb/util"
 	"strconv"
 	"strings"
 	"time"
@@ -16,7 +16,7 @@ func Around() gin.HandlerFunc {
 		ctx := initCtx(c)
 		//initCtx(c)
 		e := logEntrance(c, *ctx)
-		if e != nil{
+		if e != nil {
 			Error().Println(e)
 			return
 		}
@@ -29,6 +29,7 @@ func Around() gin.HandlerFunc {
 		c.Request.GetBody*/
 	}
 }
+
 /*func initCtx(c *gin.Context)  {
 	c.Set(config.Key_RequestId, c.Query(config.Key_RequestId))
 	c.Set(config.RequestTime, time.Now())
