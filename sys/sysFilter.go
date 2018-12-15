@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func entranceFilter() gin.HandlerFunc {
+func EntranceFilter() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if config.Conf.IsNeedOpen{
 			requestUri := c.Request.RequestURI
@@ -25,7 +25,7 @@ func entranceFilter() gin.HandlerFunc {
 	}
 }
 
-func userIdFilter() gin.HandlerFunc {
+func UserIdFilter() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if strings.HasSuffix(c.Request.RequestURI, "/login/wx") {
 			c.Next()
@@ -38,7 +38,7 @@ func userIdFilter() gin.HandlerFunc {
 		c.Next()
 	}
 }
-func companyIdFilter() gin.HandlerFunc {
+func CompanyIdFilter() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if util.GetSession(c, config.Key_CompanyId) == ""{
 			JsonRes(c, config.NoEnoughAuth, nil)
