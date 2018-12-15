@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/jwei2006/gweb/config"
-	"github.com/jwei2006/gweb/util"
 	"net/http"
 	"strconv"
 	"strings"
@@ -24,7 +23,7 @@ func JsonResErr(c *gin.Context, code int, msg string, data interface{}) {
 		"datas":   data,
 		"message": msg,
 	})
-	ctx := util.GetCtx(c)
+	ctx := GetCtx(c)
 	var builder strings.Builder
 	builder.WriteString("out<")
 	builder.WriteString("R:")

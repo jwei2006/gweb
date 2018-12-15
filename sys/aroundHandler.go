@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/jwei2006/gweb/config"
-	"github.com/jwei2006/gweb/util"
 	"io/ioutil"
 	"strconv"
 	"strings"
@@ -37,10 +36,10 @@ func Around() gin.HandlerFunc {
 func initCtx(c *gin.Context) *Context {
 	ctx := new(Context)
 	ctx.RequestTime = time.Now()
-	ctx.PrincipalCode = util.GetSession(c, config.Key_principal)
-	ctx.TenantCode = util.GetSession(c, config.Key_Tenant)
-	ctx.CompanyId = util.GetSession(c, config.Key_CompanyId)
-	ctx.UserId = util.GetSession(c, config.Key_UserId)
+	ctx.PrincipalCode = GetSession(c, config.Key_principal)
+	ctx.TenantCode = GetSession(c, config.Key_Tenant)
+	ctx.CompanyId = GetSession(c, config.Key_CompanyId)
+	ctx.UserId = GetSession(c, config.Key_UserId)
 	ctx.RequestIp = c.ClientIP()
 	ctx.RequestId = c.Query(config.Key_RequestId)
 	c.Set(config.Key_Ctx, ctx)
