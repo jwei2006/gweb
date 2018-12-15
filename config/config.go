@@ -36,5 +36,7 @@ const Value_principal string = "PINGX"
 const Key_Tenant string = "k_tenant"
 const Value_tenant string = "PX"
 const Key_CompanyId string = "k_company_id"
+const Key_Company_Type string = "k_company_type"
+const Key_Business string = "k_business"
 
 var Conf SysConfig = SysConfig{}
