@@ -40,6 +40,7 @@ func initCtx(c *gin.Context) *Context {
 	ctx.TenantCode = GetSession(c, config.Key_Tenant)
 	ctx.CompanyId = GetSession(c, config.Key_CompanyId)
 	ctx.UserId = GetSession(c, config.Key_UserId)
+	ctx.IsManager = GetSession(c, config.Key_Manager)
 	ctx.RequestIp = c.ClientIP()
 	ctx.RequestId = c.Query(config.Key_RequestId)
 	c.Set(config.Key_Ctx, ctx)

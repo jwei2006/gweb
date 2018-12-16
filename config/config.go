@@ -39,5 +39,6 @@ const Value_tenant string = "PX"
 const Key_CompanyId string = "k_companyId"
 const Key_Company_Type string = "k_companyType"
 const Key_Business string = "k_business"
+const Key_Manager string = "k_manager"
 
 var Conf SysConfig = SysConfig{}

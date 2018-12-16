@@ -31,7 +31,7 @@ func UserIdFilter() gin.HandlerFunc {
 			return
 		}
 		if GetSession(c, config.Key_UserId) == ""{
-			JsonRes(c, config.NoEnoughAuth, nil)
+			JsonRes(c, config.NoEnoughAuth, "u")
 			c.Abort()
 		}
 		c.Next()
@@ -40,7 +40,7 @@ func UserIdFilter() gin.HandlerFunc {
 func CompanyIdFilter() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if GetSession(c, config.Key_CompanyId) == ""{
-			JsonRes(c, config.NoEnoughAuth, nil)
+			JsonRes(c, config.NoEnoughAuth, "com")
 			c.Abort()
 		}
 		c.Next()

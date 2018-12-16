@@ -9,6 +9,8 @@ const (
 	ParamError = 10103
 
 	SysError = 10201
+
+	NoData = 10301
 )
 
 var statusTitle = map[int] string{
@@ -18,6 +20,7 @@ var statusTitle = map[int] string{
 	ParamError: "参数错误或缺失",
 	NoEnoughAuth: "权限不足",
 	SysError: "系统内部错误，请稍候重试",
+	NoData: "数据不存在",
 }
 
 func GetErrorCode(code int) int {
