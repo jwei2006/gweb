@@ -5,7 +5,6 @@ import (
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/jwei2006/gweb/config"
-	"github.com/jwei2006/gweb/sys"
 )
 
 func GetSession(c *gin.Context, key string) string {
@@ -21,18 +20,18 @@ func SetSession(c *gin.Context, key, val string)  {
 	session.Save()
 }
 
-func GetCtx(c *gin.Context) sys.Context {
+func GetCtx(c *gin.Context) Context {
 	ctx, exists := c.Get(config.Key_Ctx)
 	if !exists {
 		Error().Fatalln(errors.New("上下文环境不存在"))
-		_ctx := new(sys.Context)
+		_ctx := new(Context)
 		return *_ctx
 	}
-	v, ok := ctx.(sys.Context)
-	if ok{
-		return v
+	if v, ok := ctx.(*Context); ok{
+		return *v
 	}
-	_ctx := new(sys.Context)
+	Error().Fatalln(errors.New("获取上下文环境失败"))
+	_ctx := new(Context)
 	return *_ctx
 }
 
