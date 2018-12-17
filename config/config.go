@@ -1,5 +1,7 @@
 package config
 
+import "os"
+
 type SysConfig struct {
 	Port int
 	IsDebug bool
@@ -42,3 +44,31 @@ const Key_Business string = "k_business"
 const Key_Manager string = "k_manager"
 
 var Conf SysConfig = SysConfig{}
+
+const Key_Env string = "env"
+const Env_Dev string = "dev"
+const Env_Test string = "test"
+const Env_Prod string = "prod"
+var flags = map[string]interface{}{Key_Env: "dev"}
+func SetEnv(_env string) {
+	flags[Key_Env] = _env
+}
+func GetEnv() string {
+	return flags[Key_Env].(string)
+}
+func SetFlag(key string, val interface{}) {
+	flags[key] = val
+}
+func GetFlag(key string) interface{} {
+	return flags[key]
+}
+func GetStrFlag(key string) string {
+	return flags[key].(string)
+}
+func GetIntFlag(key string) int {
+	return flags[key].(int)
+}
+//环境变量
+func GetEnvData(key string) string {
+	return os.Getenv(key)
+}
