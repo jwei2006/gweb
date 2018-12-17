@@ -71,9 +71,9 @@ func logEntrance(c *gin.Context, ctx Context) error {
 	builder.WriteString(c.Request.RequestURI)
 	builder.WriteString(", form:")
 	e := c.Request.ParseForm()
-	if e == nil {
-		Info().Println("!!!!!!!!!!!!!!!!!!!!!!")
+	if e != nil {
 		Info().Println(e)
+		Error().Println(e)
 		//return e
 	}
 	//builder.WriteString(c.Request.PostForm.Encode())
