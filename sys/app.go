@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-func Run(initRouter func(*gin.Engine)) {
+func Run(initRouter func(*gin.Engine), findPrincipal func(string) string) {
 	InitLogger()
 	gin.DisableConsoleColor()
 	if !config.Conf.IsDebug {
@@ -21,7 +21,7 @@ func Run(initRouter func(*gin.Engine)) {
 	router := gin.Default()
 	store := sessions.NewCookieStore([]byte(config.Conf.CookieId))
 	router.Use(sessions.Sessions(config.Conf.SessionId, store))
-	router.Use(Around())
+	router.Use(Around(findPrincipal))
 	initRouter(router)
 
 	router.Run(":" + strconv.Itoa(config.Conf.Port))
