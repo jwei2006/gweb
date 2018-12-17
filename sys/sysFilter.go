@@ -10,10 +10,11 @@ func EntranceFilter() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if config.Conf.IsNeedOpen{
 			requestUri := c.Request.RequestURI
+			Info().Println(requestUri)
 			if !strings.HasSuffix(requestUri, config.Conf.LoginPathWx){
 				openid := GetOpenid(c)
 				if openid == ""{
-					Debug().Println("openid空")
+					Error().Println("openid空")
 					JsonRes(c, config.UnLogin, nil)
 					c.Abort()
 				}
@@ -26,7 +27,7 @@ func EntranceFilter() gin.HandlerFunc {
 
 func UserIdFilter() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if strings.HasSuffix(c.Request.RequestURI, "/login/wx") {
+		if strings.HasSuffix(c.Request.RequestURI, config.Conf.LoginPathWx) {
 			c.Next()
 			return
 		}
