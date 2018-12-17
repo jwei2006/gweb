@@ -10,9 +10,9 @@ import (
 	"time"
 )
 
-func Around() gin.HandlerFunc {
+func Around(findPrincipal func(string) string) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		ctx := initCtx(c)
+		ctx := initCtx(c, findPrincipal)
 		//initCtx(c)
 		e := logEntrance(c, *ctx)
 		if e != nil {
@@ -33,10 +33,17 @@ func Around() gin.HandlerFunc {
 	c.Set(config.Key_RequestId, c.Query(config.Key_RequestId))
 	c.Set(config.RequestTime, time.Now())
 }*/
-func initCtx(c *gin.Context) *Context {
+func initCtx(c *gin.Context, findPrincipal func(string) string) *Context {
 	ctx := new(Context)
 	ctx.RequestTime = time.Now()
 	ctx.PrincipalCode = GetSession(c, config.Key_principal)
+	if ctx.PrincipalCode == "" && findPrincipal != nil{
+		principal := findPrincipal(c.Request.RequestURI)
+		if principal != ""{
+			SetSession(c, config.Key_principal, principal)
+			ctx.PrincipalCode = principal
+		}else {Warn().Println("principal is empty")}
+	}
 	ctx.TenantCode = GetSession(c, config.Key_Tenant)
 	ctx.CompanyId = GetSession(c, config.Key_CompanyId)
 	ctx.UserId = GetSession(c, config.Key_UserId)
@@ -53,8 +60,8 @@ func logEntrance(c *gin.Context, ctx Context) error {
 	builder.WriteString("in>")
 	builder.WriteString("R:")
 	builder.WriteString(ctx.RequestId)
-	//builder.WriteString(", P:")
-	//builder.WriteString(ctx.PrincipalCode)
+	builder.WriteString(", P:")
+	builder.WriteString(ctx.PrincipalCode)
 	builder.WriteString(", T:")
 	builder.WriteString(ctx.TenantCode)
 	builder.WriteString(", C:")
@@ -74,7 +81,6 @@ func logEntrance(c *gin.Context, ctx Context) error {
 	if e != nil {
 		Info().Println(e)
 		Error().Println(e)
-		//return e
 	}
 	//builder.WriteString(c.Request.PostForm.Encode())
 	forms, _ := json.Marshal(c.Request.Form)
