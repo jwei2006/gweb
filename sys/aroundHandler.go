@@ -51,11 +51,9 @@ func initCtx(c *gin.Context, findPrincipal func(string) string) *Context {
 	if isManager != ""{ctx.IsManager,_ = strconv.Atoi(isManager)}
 	ctx.RequestIp = c.ClientIP()
 	ctx.RequestId = c.Query(config.Key_RequestId)
-	business := GetSession(c, config.Key_Business)
-	companyType := GetSession(c, config.Key_Company_Type)
+	ctx.Business = GetSession(c, config.Key_Business)
+	ctx.CompanyType = GetSession(c, config.Key_Company_Type)
 	auth := GetSession(c, config.Key_Auth)
-	if business != ""{ctx.Business,_ = strconv.Atoi(business)}
-	if companyType != ""{ctx.CompanyType,_ = strconv.Atoi(companyType)}
 	if auth != ""{ctx.Auth,_ = strconv.Atoi(auth)}
 	c.Set(config.Key_Ctx, ctx)
 	return ctx

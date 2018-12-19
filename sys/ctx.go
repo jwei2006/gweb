@@ -13,6 +13,6 @@ type Context struct {
 	RequestId string
 	IsManager int
 	Auth int
-	Business int
-	CompanyType int
+	Business string
+	CompanyType string
 }
