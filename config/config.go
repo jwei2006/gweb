@@ -42,6 +42,7 @@ const Key_CompanyId string = "k_companyId"
 const Key_Company_Type string = "k_companyType"
 const Key_Business string = "k_business"
 const Key_Manager string = "k_manager"
+const Key_Auth string = "k_auth"
 
 var Conf SysConfig = SysConfig{}
 
